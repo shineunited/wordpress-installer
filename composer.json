@@ -1,0 +1,50 @@
+{
+	"name": "shineunited/wordpress-installer",
+	"type": "composer-plugin",
+	"require": {
+		"php": ">=8.0",
+		"composer-plugin-api": "^2.0",
+		"shineunited/conductor": "*",
+		"shineunited/conductor-twig-addon": "*",
+		"oscarotero/env": "^2.1",
+		"roots/bedrock-autoloader": "^1.0",
+		"roots/wp-config": "^1.0"
+	},
+	"require-dev": {
+		"composer/composer": "^2.4",
+		"shineunited/conductor-gitignore-addon": "*",
+		"squizlabs/php_codesniffer": "^3.0",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"shineunited/coding-standard": "^1.0",
+		"phpstan/phpstan": "^1.9"
+	},
+	"suggest": {
+		"shineunited/conductor-gitignore-addon": "Allows autogeneration of gitignore rules for installed packages and created files",
+		"roots/bedrock-disallow-indexing": "Disallow indexing of your site on non-production environments",
+		"roots/wp-password-bcrypt": "Replaces wp_hash_password and wp_check_password with password_hash and password_verify using bcrypt"
+	},
+	"autoload": {
+		"psr-4": {
+			"ShineUnited\\WordPress\\Installer\\": "src/"
+		}
+	},
+	"extra": {
+		"class": "ShineUnited\\WordPress\\Installer\\Plugin",
+		"gitignore": {
+			"disable": true
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"shineunited/conductor": false,
+			"shineunited/conductor-gitignore-addon": false,
+			"shineunited/conductor-twig-addon": false,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"phpcs": "phpcs -ps --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1",
+		"phpcbf": "phpcbf -p --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1",
+		"phpstan": "phpstan analyse"
+	}
+}
