@@ -13,5 +13,8 @@
 	<rule ref="ShineUnited-RequireTypeHints" />
 	<rule ref="ShineUnited-RequireComments" />
 
+	<rule ref="Squiz.Commenting.ClassComment" />
+
 	<file>src/</file>
+	<file>tests/</file>
 </ruleset>
