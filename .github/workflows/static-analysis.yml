@@ -1,0 +1,22 @@
+name: Static Analysis
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+jobs:
+    phpstan:
+        runs-on: ubuntu-latest
+        name: PHP Static Analysis
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.0"
+            - name: Install Dependencies
+              run: composer install --no-interaction
+            - name: Run Script
+              run: composer phpstan
