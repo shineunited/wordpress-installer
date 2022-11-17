@@ -9,16 +9,12 @@ jobs:
         name: PHP Static Analysis
         steps:
             - name: Checkout Code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
                   php-version: "8.0"
             - name: Install Dependencies
-              uses: nick-invision/retry@v1
-              with:
-                  timeout_minutes: 10
-                  max_attempts: 3
-                  command: composer install --no-interaction
+              run: composer install --no-interaction
             - name: Run Script
               run: composer phpstan
