@@ -16,6 +16,7 @@ namespace ShineUnited\WordPress\Installer\Provider;
 use ShineUnited\WordPress\Installer\Extension\ExtensionInterface;
 use ShineUnited\Conductor\Capability\BlueprintProvider as BlueprintProviderCapability;
 use ShineUnited\Conductor\Addon\Twig\Blueprint\TwigBlueprint;
+use ShineUnited\Conductor\Configuration\Configuration;
 use ShineUnited\WordPress\Installer\Capability\ExtensionProvider as ExtensionProviderCapability;
 use Composer\Plugin\PluginManager;
 
@@ -43,9 +44,11 @@ class BlueprintProvider implements BlueprintProviderCapability {
 			new TwigBlueprint('{$wordpress.config-dir}/environment/staging.php', '@wordpress/config/staging.php', [], 'ask', 'never'),
 			new TwigBlueprint('{$wordpress.config-dir}/environment/development.php', '@wordpress/config/development.php', [], 'ask', 'never'),
 			new TwigBlueprint('{$wordpress.wpconfig-dir}/wp-config.php', '@wordpress/config/wp-config.php', [
-				'extensions' => function (PluginManager $pluginManager) {
+				'extensions' => function (Configuration $config, PluginManager $pluginManager) {
 					$extensions = [];
-					$providers = $pluginManager->getPluginCapabilities(ExtensionProviderCapability::class, []);
+					$providers = $pluginManager->getPluginCapabilities(ExtensionProviderCapability::class, [
+						'config' => $config
+					]);
 					foreach ($providers as $provider) {
 						foreach ($provider->getExtensions() as $extension) {
 							if (!$extension instanceof ExtensionInterface) {

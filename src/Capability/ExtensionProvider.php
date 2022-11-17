@@ -16,6 +16,14 @@ namespace ShineUnited\WordPress\Installer\Capability;
 use ShineUnited\WordPress\Installer\Extension\ExtensionInterface;
 use Composer\Plugin\Capability\Capability;
 
+/**
+ * Extension Provider Interface
+ *
+ * This capability will receive an array with 'config' key as constructor
+ * argument. This contains a ShineUnited\Conductor\Configuration\Configuration
+ * instance. It also contains a 'plugin' key containing the plugin instance that
+ * created the capability.
+ */
 interface ExtensionProvider extends Capability {
 
 	/**
