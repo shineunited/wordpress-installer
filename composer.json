@@ -35,10 +35,7 @@
 		}
 	},
 	"extra": {
-		"class": "ShineUnited\\WordPress\\Installer\\Plugin",
-		"gitignore": {
-			"disable": true
-		}
+		"class": "ShineUnited\\WordPress\\Installer\\Plugin"
 	},
 	"config": {
 		"allow-plugins": {
