@@ -1,6 +1,12 @@
 {
 	"name": "shineunited/wordpress-installer",
 	"type": "composer-plugin",
+	"license": "MIT",
+	"description": "Conductor based WordPress installer.",
+	"keywords": [
+		"conductor",
+		"wordpress"
+	],
 	"require": {
 		"php": ">=8.0",
 		"composer-plugin-api": "^2.0",
