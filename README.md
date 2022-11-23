@@ -16,7 +16,7 @@ A WordPress installer built with Conductor.
 
 to add wordpress-installer, the recommended method is via composer.
 ```sh
-$ composer require shineunited/conductor-twig-addon
+$ composer require shineunited/wordpress-installer
 ```
 
 
