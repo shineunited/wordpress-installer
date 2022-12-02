@@ -16,7 +16,7 @@
 		}
 	},
 	"require": {
-		"shineunited/wordpress-installer": "dev-main"
+		"shineunited/wordpress-installer": "@dev"
 	},
 	"require-dev": {
 		"roots/wordpress-no-content": "6.0",
@@ -29,5 +29,8 @@
 			"shineunited/*": true,
 			"composer/installers": false
 		}
+	},
+	"scripts": {
+		"clean": "find . \\! -path './composer.json' -delete"
 	}
 }
