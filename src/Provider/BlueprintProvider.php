@@ -38,7 +38,6 @@ class BlueprintProvider implements BlueprintProviderCapability {
 			new TwigBlueprint('{$wordpress.plugins-dir}/index.php', '@wordpress/content/silence.php'),
 			new TwigBlueprint('{$wordpress.themes-dir}/index.php', '@wordpress/content/silence.php'),
 			new TwigBlueprint('{$wordpress.uploads-dir}/index.php', '@wordpress/content/silence.php'),
-			new TwigBlueprint('{$working-dir}/wp-cli.yml', '@wordpress/core/wp-cli.yml'),
 			new TwigBlueprint('{$wordpress.config-dir}/application.php', '@wordpress/config/application.php', [], 'ask', 'never'),
 			new TwigBlueprint('{$wordpress.config-dir}/environment/production.php', '@wordpress/config/production.php', [], 'ask', 'never'),
 			new TwigBlueprint('{$wordpress.config-dir}/environment/staging.php', '@wordpress/config/staging.php', [], 'ask', 'never'),
