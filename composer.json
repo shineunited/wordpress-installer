@@ -14,7 +14,8 @@
 		"shineunited/conductor-twig-addon": "^1.0",
 		"oscarotero/env": "^2.1",
 		"roots/bedrock-autoloader": "^1.0",
-		"roots/wp-config": "^1.0"
+		"roots/wp-config": "^1.0",
+		"symfony/filesystem": "^6.0"
 	},
 	"require-dev": {
 		"composer/composer": "^2.4",

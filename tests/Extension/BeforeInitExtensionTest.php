@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace ShineUnited\WordPress\Installer\Tests\Extension;
 
 use ShineUnited\WordPress\Installer\Extension\BeforeInitExtension;
+use ShineUnited\WordPress\Installer\Extension\InitializeConfigExtension;
 
 /**
- * Base Provider Test Case
+ * Before Init Extension Test
  */
-class BeforeInitExtensionTest extends ExtensionTestCase {
+class BeforeInitExtensionTest extends PathExtensionTestCase {
 
 	/**
 	 * {@inheritDoc}
@@ -30,28 +31,30 @@ class BeforeInitExtensionTest extends ExtensionTestCase {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function expectedLoadBeforeInit(): bool {
-		return true;
+	protected function getConstructorArguments(): array {
+		return [
+			$this->expectedPath()
+		];
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function expectedLoadAfterInit(): bool {
-		return false;
+	protected function expectedPriority(): int {
+		return InitializeConfigExtension::PRIORITY - 1;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected function expectedLoadBeforeEnv(): bool {
-		return false;
+	protected function expectedPath(): string {
+		return 'path/to/include';
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @return void
 	 */
-	protected function expectedLoadAfterEnv(): bool {
-		return false;
+	public function testGenerateCode(): void {
+		$this->toDo();
 	}
 }

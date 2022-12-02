@@ -13,19 +13,18 @@ declare(strict_types=1);
 
 namespace ShineUnited\WordPress\Installer\Tests\Extension;
 
-use ShineUnited\WordPress\Installer\Extension\AfterEnvExtension;
-use ShineUnited\WordPress\Installer\Extension\LoadEnvironmentConfigExtension;
+use ShineUnited\WordPress\Installer\Extension\CallbackExtension;
 
 /**
- * After Env Extension Test
+ * Callback Extension Test
  */
-class AfterEnvExtensionTest extends PathExtensionTestCase {
+class CallbackExtensionTest extends ExtensionTestCase {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	protected function getExtensionClass(): string {
-		return AfterEnvExtension::class;
+		return CallbackExtension::class;
 	}
 
 	/**
@@ -33,7 +32,8 @@ class AfterEnvExtensionTest extends PathExtensionTestCase {
 	 */
 	protected function getConstructorArguments(): array {
 		return [
-			$this->expectedPath()
+			'phpinfo',
+			$this->expectedPriority()
 		];
 	}
 
@@ -41,14 +41,16 @@ class AfterEnvExtensionTest extends PathExtensionTestCase {
 	 * {@inheritDoc}
 	 */
 	protected function expectedPriority(): int {
-		return LoadEnvironmentConfigExtension::PRIORITY + 1;
+		return 12345;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @return void
 	 */
-	protected function expectedPath(): string {
-		return 'path/to/include';
+	public function testGetCallback(): void {
+		$extension = $this->createExtension();
+
+		$this->assertSame('phpinfo', $extension->getCallback());
 	}
 
 	/**

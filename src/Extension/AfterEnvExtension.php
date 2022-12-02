@@ -16,8 +16,7 @@ namespace ShineUnited\WordPress\Installer\Extension;
 /**
  * After Env Extension
  */
-class AfterEnvExtension implements ExtensionInterface {
-	private string $includePath;
+class AfterEnvExtension extends RequirePathExtension {
 
 	/**
 	 * Initializes the extension.
@@ -25,41 +24,6 @@ class AfterEnvExtension implements ExtensionInterface {
 	 * @param string $includePath The path to include in wordpress config.
 	 */
 	public function __construct(string $includePath) {
-		$this->includePath = $includePath;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getIncludePath(): string {
-		return $this->includePath;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function loadBeforeInit(): bool {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function loadAfterInit(): bool {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function loadBeforeEnv(): bool {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function loadAfterEnv(): bool {
-		return true;
+		parent::__construct($includePath, LoadEnvironmentConfigExtension::PRIORITY + 1);
 	}
 }

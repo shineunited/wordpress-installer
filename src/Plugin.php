@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace ShineUnited\WordPress\Installer;
 
 use ShineUnited\WordPress\Installer\Provider\BlueprintProvider;
+use ShineUnited\WordPress\Installer\Provider\ExtensionProvider;
 use ShineUnited\WordPress\Installer\Provider\GitignoreProvider;
 use ShineUnited\WordPress\Installer\Provider\InstallerProvider;
 use ShineUnited\WordPress\Installer\Provider\NamespaceProvider;
 use ShineUnited\WordPress\Installer\Provider\ParameterProvider;
+use ShineUnited\WordPress\Installer\Capability\ExtensionProvider as ExtensionProviderCapability;
 use ShineUnited\Conductor\Capability\BlueprintProvider as BlueprintProviderCapability;
 use ShineUnited\Conductor\Capability\InstallerProvider as InstallerProviderCapability;
 use ShineUnited\Conductor\Capability\ParameterProvider as ParameterProviderCapability;
@@ -60,6 +62,7 @@ class Plugin implements PluginInterface, Capable {
 	public function getCapabilities(): array {
 		return [
 			BlueprintProviderCapability::class => BlueprintProvider::class,
+			ExtensionProviderCapability::class => ExtensionProvider::class,
 			GitignoreProviderCapability::class => GitignoreProvider::class,
 			InstallerProviderCapability::class => InstallerProvider::class,
 			NamespaceProviderCapability::class => NamespaceProvider::class,

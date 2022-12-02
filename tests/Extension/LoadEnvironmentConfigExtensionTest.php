@@ -13,42 +13,32 @@ declare(strict_types=1);
 
 namespace ShineUnited\WordPress\Installer\Tests\Extension;
 
-use ShineUnited\WordPress\Installer\Extension\AfterEnvExtension;
 use ShineUnited\WordPress\Installer\Extension\LoadEnvironmentConfigExtension;
 
 /**
- * After Env Extension Test
+ * Load Environment Config Extension Test
  */
-class AfterEnvExtensionTest extends PathExtensionTestCase {
+class LoadEnvironmentConfigExtensionTest extends ExtensionTestCase {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	protected function getExtensionClass(): string {
-		return AfterEnvExtension::class;
+		return LoadEnvironmentConfigExtension::class;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	protected function getConstructorArguments(): array {
-		return [
-			$this->expectedPath()
-		];
+		return [];
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	protected function expectedPriority(): int {
-		return LoadEnvironmentConfigExtension::PRIORITY + 1;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	protected function expectedPath(): string {
-		return 'path/to/include';
+		return 3000;
 	}
 
 	/**

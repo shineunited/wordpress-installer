@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace ShineUnited\WordPress\Installer\Tests\Extension;
 
 use ShineUnited\WordPress\Installer\Tests\TestCase;
+use ShineUnited\WordPress\Installer\Extension\ExtensionInterface;
+use ReflectionClass;
 
 /**
  * Base Extension Test Case
@@ -26,79 +28,43 @@ abstract class ExtensionTestCase extends TestCase {
 	abstract protected function getExtensionClass(): string;
 
 	/**
-	 * @return boolean True if expected to load before init.
+	 * @return string[] Constructor arguments.
 	 */
-	abstract protected function expectedLoadBeforeInit(): bool;
+	abstract protected function getConstructorArguments(): array;
 
 	/**
-	 * @return boolean True if expected to load after init.
+	 * @return int Expected priority.
 	 */
-	abstract protected function expectedLoadAfterInit(): bool;
+	abstract protected function expectedPriority(): int;
 
 	/**
-	 * @return boolean True if expected to load before env.
+	 * @return mixed The extension.
 	 */
-	abstract protected function expectedLoadBeforeEnv(): bool;
+	protected function createExtension(): mixed {
+		$class = $this->getExtensionClass();
+		$args = $this->getConstructorArguments();
+		$reflector = new ReflectionClass($class);
 
-	/**
-	 * @return boolean True if expected to load after env.
-	 */
-	abstract protected function expectedLoadAfterEnv(): bool;
-
-	/**
-	 * @return void
-	 */
-	public function testGetIncludePath(): void {
-		$includePaths = [
-			'my/test/include/path',
-			'path/to/another/test',
-			'/not/a/real/path'
-		];
-
-		$extensionClass = $this->getExtensionClass();
-		foreach ($includePaths as $includePath) {
-			$extension = new $extensionClass($includePath);
-			$this->assertSame($includePath, $extension->getIncludePath());
-		}
+		return $reflector->newInstanceArgs($args);
 	}
 
 	/**
 	 * @return void
 	 */
-	public function testLoadBeforeInit(): void {
-		$extensionClass = $this->getExtensionClass();
-		$extension = new $extensionClass('includepath');
+	public function testConstructor(): void {
+		$extension = $this->createExtension();
 
-		$this->assertSame($this->expectedLoadBeforeInit(), $extension->loadBeforeInit());
+		$this->assertInstanceOf($this->getExtensionClass(), $extension);
+		$this->assertInstanceOf(ExtensionInterface::class, $extension);
 	}
 
 	/**
 	 * @return void
 	 */
-	public function testLoadAfterInit(): void {
-		$extensionClass = $this->getExtensionClass();
-		$extension = new $extensionClass('includepath');
+	public function testGetPriority(): void {
+		$extension = $this->createExtension();
 
-		$this->assertSame($this->expectedLoadAfterInit(), $extension->loadAfterInit());
-	}
-
-	/**
-	 * @return void
-	 */
-	public function testLoadBeforeEnv(): void {
-		$extensionClass = $this->getExtensionClass();
-		$extension = new $extensionClass('includepath');
-
-		$this->assertSame($this->expectedLoadBeforeEnv(), $extension->loadBeforeEnv());
-	}
-
-	/**
-	 * @return void
-	 */
-	public function testLoadAfterEnv(): void {
-		$extensionClass = $this->getExtensionClass();
-		$extension = new $extensionClass('includepath');
-
-		$this->assertSame($this->expectedLoadAfterEnv(), $extension->loadAfterEnv());
+		$priority = $this->expectedPriority();
+		$this->assertSame($priority, $extension->getPriority());
 	}
 }
