@@ -33,7 +33,7 @@ abstract class ExtensionTestCase extends TestCase {
 	abstract protected function getConstructorArguments(): array;
 
 	/**
-	 * @return int Expected priority.
+	 * @return integer Expected priority.
 	 */
 	abstract protected function expectedPriority(): int;
 
