@@ -19,9 +19,10 @@ use ShineUnited\Conductor\Addon\Twig\Blueprint\TwigBlueprint;
 use ShineUnited\Conductor\Configuration\Configuration;
 use ShineUnited\WordPress\Installer\Capability\ExtensionProvider as ExtensionProviderCapability;
 use Composer\Plugin\PluginManager;
+use Composer\Plugin\Capable;
 
 /**
- * Namespace Provider
+ * Blueprint Provider
  */
 class BlueprintProvider implements BlueprintProviderCapability {
 
@@ -46,18 +47,46 @@ class BlueprintProvider implements BlueprintProviderCapability {
 			new TwigBlueprint('{$vendor-dir}/wordpress-autoload.php', '@wordpress/config/wordpress-autoload.php', [
 				'extensions' => function (Configuration $config, PluginManager $pluginManager) {
 					$extensions = [];
-					$providers = $pluginManager->getPluginCapabilities(ExtensionProviderCapability::class, [
-						'config' => $config
-					]);
-					foreach ($providers as $provider) {
-						foreach ($provider->getExtensions() as $extension) {
+
+					foreach ($pluginManager->getPlugins() as $plugin) {
+						if (!$plugin instanceof Capable) {
+							continue;
+						}
+
+						$extensionProvider = $pluginManager->getPluginCapability($plugin, ExtensionProviderCapability::class, [
+							'config' => $config
+						]);
+
+						if (is_null($extensionProvider)) {
+							continue;
+						}
+
+
+						foreach ($extensionProvider->getExtensions() as $extension) {
 							if (!$extension instanceof ExtensionInterface) {
 								throw new \Exception('Invalid extension: ' . get_class($extension));
 							}
 
-							$extensions[] = $extension;
+							$extensions[] = [
+								'plugin'   => $plugin::class,
+								'class'    => $extension::class,
+								'priority' => $extension->getPriority(),
+								'code'     => $extension->generateCode($config)
+							];
 						}
 					}
+
+					usort($extensions, function ($a, $b) {
+						if ($a['priority'] < $b['priority']) {
+							return -1;
+						}
+
+						if ($a['priority'] > $b['priority']) {
+							return 1;
+						}
+
+						return 0;
+					});
 
 					return $extensions;
 				}
