@@ -16,23 +16,16 @@ namespace ShineUnited\WordPress\Installer\Extension;
 use ShineUnited\Conductor\Configuration\Configuration;
 
 /**
- * Extension Interface
+ * Include Path Extension
  */
-interface ExtensionInterface {
+class IncludePathExtension extends PathExtension {
 
 	/**
-	 * Get the extension loading priority.
-	 *
-	 * @return integer The priority.
+	 * {@inheritDoc}
 	 */
-	public function getPriority(): int;
+	public function generateCode(Configuration $config): string {
+		$path = $config->processStringValue($this->getPath());
 
-	/**
-	 * Generate the extension code.
-	 *
-	 * @param Configuration $config The conductor configuration.
-	 *
-	 * @return string The code.
-	 */
-	public function generateCode(Configuration $config): string;
+		return 'include(\'' . addslashes($path) . '\');';
+	}
 }

@@ -20,4 +20,11 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
  */
 abstract class TestCase extends BaseTestCase {
 
+	/**
+	 * @return void
+	 */
+	protected function toDo(): void {
+		$caller = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+		self::markTestIncomplete(sprintf('To-Do: %s::%s', $caller['class'], $caller['function']));
+	}
 }

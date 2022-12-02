@@ -17,7 +17,7 @@ use ShineUnited\Conductor\Addon\Gitignore\Capability\GitignoreProvider as Gitign
 use ShineUnited\Conductor\Addon\Gitignore\Pattern\Rule;
 
 /**
- * Namespace Provider
+ * Gitignore Provider
  */
 class GitignoreProvider implements GitignoreProviderCapability {
 

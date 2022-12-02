@@ -17,7 +17,7 @@ use ShineUnited\Conductor\Capability\InstallerProvider as InstallerProviderCapab
 use ShineUnited\Conductor\Filesystem\Installer\PathInstaller;
 
 /**
- * Namespace Provider
+ * Installer Provider
  */
 class InstallerProvider implements InstallerProviderCapability {
 
