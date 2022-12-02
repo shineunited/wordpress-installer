@@ -35,7 +35,6 @@ class GitignoreProvider implements GitignoreProviderCapability {
 			new Rule('{$wordpress.themes-dir}/index.php'),
 			new Rule('{$wordpress.uploads-dir}'),
 			new Rule('{$wordpress.upgrade-dir}'),
-			new Rule('{$working-dir}/wp-cli.yml'),
 			new Rule('{$wordpress.wpconfig-dir}/wp-config.php'),
 		];
 	}
