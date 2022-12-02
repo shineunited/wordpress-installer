@@ -1,3 +1,0 @@
-path: {{ path('wordpress.install-dir', 'working-dir') }}
-server:
-  docroot: {{ path('wordpress.webroot', 'working-dir') }}

@@ -20,7 +20,7 @@ use ShineUnited\Conductor\Configuration\Parameter\PathParameter;
 use ShineUnited\Conductor\Configuration\Parameter\SelectParameter;
 
 /**
- * Namespace Provider
+ * Parameter Provider
  */
 class ParameterProvider implements ParameterProviderCapability {
 
