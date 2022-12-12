@@ -41,10 +41,7 @@ abstract class PathExtensionTestCase extends ExtensionTestCase {
 	 * @return void
 	 */
 	public function testGetPath(): void {
-		$extension = $this->createExtension();
-
-		$path = $this->expectedPath();
-		$this->assertSame($path, $extension->getPath());
+		$this->toDo();
 	}
 
 	/**

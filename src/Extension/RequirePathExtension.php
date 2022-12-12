@@ -24,8 +24,6 @@ class RequirePathExtension extends PathExtension {
 	 * {@inheritDoc}
 	 */
 	public function generateCode(Configuration $config): string {
-		$path = $config->processStringValue($this->getPath());
-
-		return 'require(\'' . addslashes($path) . '\');';
+		return 'require(\'' . addslashes($this->getPath($config)) . '\');';
 	}
 }

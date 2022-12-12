@@ -24,8 +24,6 @@ class IncludePathExtension extends PathExtension {
 	 * {@inheritDoc}
 	 */
 	public function generateCode(Configuration $config): string {
-		$path = $config->processStringValue($this->getPath());
-
-		return 'include(\'' . addslashes($path) . '\');';
+		return 'include(\'' . addslashes($this->getPath($config)) . '\');';
 	}
 }

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace ShineUnited\WordPress\Installer\Extension;
 
+use ShineUnited\Conductor\Configuration\Configuration;
+use Symfony\Component\Filesystem\Path;
+
 /**
  * Abstract Path Extension
  */
@@ -34,9 +37,16 @@ abstract class PathExtension extends PriorityExtension {
 	/**
 	 * Get the path.
 	 *
+	 * @param Configuration $config The conductor configuration.
+	 *
 	 * @return string The path.
 	 */
-	public function getPath(): string {
-		return $this->path;
+	public function getPath(Configuration $config): string {
+		$path = $config->processStringValue($this->path);
+
+		$path = Path::canonicalize($path);
+		$path = Path::makeRelative($path, $config['vendor-dir']);
+
+		return $path;
 	}
 }
