@@ -40,9 +40,9 @@ class BlueprintProvider implements BlueprintProviderCapability {
 			new TwigBlueprint('{$wordpress.themes-dir}/index.php', '@wordpress/content/silence.php'),
 			new TwigBlueprint('{$wordpress.uploads-dir}/index.php', '@wordpress/content/silence.php'),
 			new TwigBlueprint('{$wordpress.config-dir}/application.php', '@wordpress/config/application.php', [], 'ask', 'never'),
-			new TwigBlueprint('{$wordpress.config-dir}/environment/production.php', '@wordpress/config/production.php', [], 'ask', 'never'),
-			new TwigBlueprint('{$wordpress.config-dir}/environment/staging.php', '@wordpress/config/staging.php', [], 'ask', 'never'),
-			new TwigBlueprint('{$wordpress.config-dir}/environment/development.php', '@wordpress/config/development.php', [], 'ask', 'never'),
+			new TwigBlueprint('{$wordpress.config-dir}/environments/production.php', '@wordpress/config/production.php', [], 'ask', 'never'),
+			new TwigBlueprint('{$wordpress.config-dir}/environments/staging.php', '@wordpress/config/staging.php', [], 'ask', 'never'),
+			new TwigBlueprint('{$wordpress.config-dir}/environments/development.php', '@wordpress/config/development.php', [], 'ask', 'never'),
 			new TwigBlueprint('{$wordpress.wpconfig-dir}/wp-config.php', '@wordpress/config/wp-config.php'),
 			new TwigBlueprint('{$vendor-dir}/wordpress-autoload.php', '@wordpress/config/wordpress-autoload.php', [
 				'extensions' => function (Configuration $config, PluginManager $pluginManager) {
