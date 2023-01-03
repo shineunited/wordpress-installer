@@ -37,7 +37,7 @@ class DefineWPContentDirExtension extends PriorityExtension {
 
 		$path = Path::makeRelative($config['wordpress.content-dir'], $config['vendor-dir']);
 		$self = '__DIR__';
-		while(substr($path, 0, 3) == '../') {
+		while (substr($path, 0, 3) == '../') {
 			$path = substr($path, 3);
 			$self = 'dirname(' . $self . ')';
 		}
